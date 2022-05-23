@@ -8,6 +8,7 @@ import {
   Subject,
   switchMap,
   tap,
+  concatMap,
   withLatestFrom
 } from 'rxjs';
 import { Connect, Message } from 'src/app/protos/message.pb';
@@ -21,7 +22,7 @@ export class MessageService {
   private message$$: Subject<string> = new ReplaySubject<string>(1);
 
   messageStream$ = this.connect$$.pipe(
-    switchMap(c => this.messagingClient.connectToChat(c)),
+    concatMap(c => this.messagingClient.connectToChat(c)),
     map(msg => [msg]),
     scan((acc, msg) => acc.concat(msg))
   );
