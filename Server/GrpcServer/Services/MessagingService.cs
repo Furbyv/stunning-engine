@@ -12,7 +12,11 @@ namespace GrpcServer.Services
         {
             do
             {
-                _messagesProvider.Subscribe(request.Username, responseStream);
+                var connected = _messagesProvider.Subscribe(request.Username, responseStream);
+                if (connected)
+                {
+                    await responseStream.WriteAsync(new Message() { Message_ = "Succesfully joined chat", Username = request.Username});
+                }
             }
             while (!context.CancellationToken.IsCancellationRequested);
             _messagesProvider.Unsubscribe(request.Username);

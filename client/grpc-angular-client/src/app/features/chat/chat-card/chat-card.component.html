@@ -4,9 +4,20 @@
       <mat-label>Enter username</mat-label>
       <input matInput placeholder="Ex. User1234" />
     </mat-form-field>
-    <button class="btn" mat-raised-button color="primary">Join chat</button>
+    <button
+      class="btn"
+      mat-raised-button
+      color="primary"
+      (click)="joinChat('abc')"
+    >
+      Join chat
+    </button>
   </div>
-  <div class="chat-area"></div>
+  <div class="chat-area">
+    <p *ngIf="messages$ | async as message">
+      {{ message.message }}
+    </p>
+  </div>
   <div class="message">
     <mat-form-field class="message-input" appearance="outline">
       <textarea matInput placeholder="Enter message..."></textarea>

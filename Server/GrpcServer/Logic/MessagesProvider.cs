@@ -11,7 +11,7 @@ public class MessagesProvider
 
     private async Task<bool> SendMessage(Message message)
     {
-        foreach(var user in users.Where(u => u.Key != message.Username))
+        foreach(var user in users)
         {
             var item = await SendMessageToSubscriber(user, message);
             if(item != null)
