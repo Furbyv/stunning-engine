@@ -2,7 +2,12 @@
   <div class="subscribe">
     <mat-form-field class="username-input" appearance="outline">
       <mat-label>Enter username</mat-label>
-      <input matInput [(ngModel)]="username" placeholder="Ex. User1234" />
+      <input
+        matInput
+        [(ngModel)]="username"
+        placeholder="Ex. User1234"
+        [disabled]="(isConnected$ | async) !== null"
+      />
     </mat-form-field>
     <button
       class="btn"
@@ -15,7 +20,7 @@
     </button>
   </div>
   <div class="chat-area">
-    <p *ngFor="let msg of messages$ | async">
+    <p *ngFor="let msg of messages$ | async; trackBy: trackByFn">
       {{ msg.username }}: {{ msg.message }}
     </p>
   </div>

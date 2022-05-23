@@ -297,6 +297,7 @@ export class Message implements GrpcMessage {
   static refineValues(_instance: Message) {
     _instance.username = _instance.username || '';
     _instance.message = _instance.message || '';
+    _instance.id = _instance.id || '';
   }
 
   /**
@@ -318,6 +319,9 @@ export class Message implements GrpcMessage {
         case 2:
           _instance.message = _reader.readString();
           break;
+        case 3:
+          _instance.id = _reader.readString();
+          break;
         default:
           _reader.skipField();
       }
@@ -338,10 +342,14 @@ export class Message implements GrpcMessage {
     if (_instance.message) {
       _writer.writeString(2, _instance.message);
     }
+    if (_instance.id) {
+      _writer.writeString(3, _instance.id);
+    }
   }
 
   private _username?: string;
   private _message?: string;
+  private _id?: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -351,6 +359,7 @@ export class Message implements GrpcMessage {
     _value = _value || {};
     this.username = _value.username;
     this.message = _value.message;
+    this.id = _value.id;
     Message.refineValues(this);
   }
   get username(): string | undefined {
@@ -364,6 +373,12 @@ export class Message implements GrpcMessage {
   }
   set message(value: string | undefined) {
     this._message = value;
+  }
+  get id(): string | undefined {
+    return this._id;
+  }
+  set id(value: string | undefined) {
+    this._id = value;
   }
 
   /**
@@ -382,7 +397,8 @@ export class Message implements GrpcMessage {
   toObject(): Message.AsObject {
     return {
       username: this.username,
-      message: this.message
+      message: this.message,
+      id: this.id
     };
   }
 
@@ -404,7 +420,8 @@ export class Message implements GrpcMessage {
   ): Message.AsProtobufJSON {
     return {
       username: this.username,
-      message: this.message
+      message: this.message,
+      id: this.id
     };
   }
 }
@@ -415,6 +432,7 @@ export module Message {
   export interface AsObject {
     username?: string;
     message?: string;
+    id?: string;
   }
 
   /**
@@ -423,5 +441,6 @@ export module Message {
   export interface AsProtobufJSON {
     username?: string;
     message?: string;
+    id?: string;
   }
 }

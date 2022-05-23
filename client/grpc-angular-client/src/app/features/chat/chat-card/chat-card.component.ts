@@ -18,9 +18,14 @@ export class ChartCardComponent {
 
   sendMessage(message: string) {
     this.messageService.sendMessage(message);
+    this.message = '';
   }
 
   joinChat(username: string) {
     this.messageService.connectToChat(username);
+  }
+
+  trackByFn(_: number, msg: Message) {
+    return msg.id;
   }
 }
