@@ -1,6 +1,15 @@
 import { Injectable } from '@angular/core';
 import { toAsyncState } from '@ngneat/loadoff';
-import { ReplaySubject, Subject, switchMap, withLatestFrom } from 'rxjs';
+import {
+  map,
+  reduce,
+  ReplaySubject,
+  scan,
+  Subject,
+  switchMap,
+  tap,
+  withLatestFrom
+} from 'rxjs';
 import { Connect, Message } from 'src/app/protos/message.pb';
 import { MessagingClient } from 'src/app/protos/message.pbsc';
 
@@ -12,7 +21,9 @@ export class MessageService {
   private message$$: Subject<string> = new ReplaySubject<string>(1);
 
   messageStream$ = this.connect$$.pipe(
-    switchMap(c => this.messagingClient.connectToChat(c))
+    switchMap(c => this.messagingClient.connectToChat(c)),
+    map(msg => [msg]),
+    scan((acc, msg) => acc.concat(msg))
   );
 
   disconnect$ = this.disconnect$$.pipe(

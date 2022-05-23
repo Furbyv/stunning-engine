@@ -15,8 +15,8 @@
     </button>
   </div>
   <div class="chat-area">
-    <p *ngIf="messages$ | async as message">
-      {{ message.username }} ": " {{ message.message }}
+    <p *ngFor="let msg of messages$ | async">
+      {{ msg.username }}: {{ msg.message }}
     </p>
   </div>
   <div class="message">

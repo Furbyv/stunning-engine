@@ -11,7 +11,7 @@ import { MessageService } from '../services/message.service';
 export class ChartCardComponent {
   username: string = '';
   message: string = '';
-  messages$: Observable<Message> = this.messageService.messageStream$;
+  messages$: Observable<Message[]> = this.messageService.messageStream$;
   isConnected$ = this.messageService.connected$;
   sending$ = this.messageService.sendMessage$.pipe(map(state => state.loading));
   constructor(private messageService: MessageService) {}
