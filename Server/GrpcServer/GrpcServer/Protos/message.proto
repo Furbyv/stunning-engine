@@ -1,0 +1,29 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "GrpcServer";
+
+package message;
+
+// The messaging service definition.
+service Messaging {
+  // Subscribe to message stream
+  rpc ConnectToChat (Connect) returns (stream Message);
+  rpc SendMessage(Message) returns (Status);
+  rpc Unsubscribe(Connect) returns (Status);
+}
+
+// Inititial request message to connect to the Chat stream
+message Connect {
+  string username = 1;
+}
+
+message Status{
+	bool state = 1;
+}
+
+// A message from a user
+message Message {
+  string username = 1;
+  string message = 2;
+}
