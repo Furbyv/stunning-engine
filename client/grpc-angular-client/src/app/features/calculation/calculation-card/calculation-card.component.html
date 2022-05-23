@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-title class="title">Calculation progress demo</mat-card-title>
+  <div *ngIf="progress$ | async as progress" class="progress-bar">
+    <mat-progress-bar
+      class="bar"
+      mode="determinate"
+      [value]="progress.progress"
+    ></mat-progress-bar>
+    <p class="progress">
+      {{ progress.finished }}/{{ progress.toDo! + progress.finished! }}
+    </p>
+  </div>
+  <button
+    mat-raised-button
+    class="button"
+    color="primary"
+    (click)="startCalculation()"
+  >
+    Start calculation
+  </button>
+</mat-card>

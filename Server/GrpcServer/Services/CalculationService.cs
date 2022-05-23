@@ -13,18 +13,18 @@ namespace GrpcServer.Services
                 var progress= new Progress();
                 progress.ToDo = toDo;
                 progress.Finished = request.TaskSize - toDo;
-                if(progress.ToDo > 0 && progress.Finished > 0)
+                if(toDo > 0)
                 {
-                    progress.Progress_ = progress.ToDo / progress.Finished;
+                    progress.Progress_ = (((double)(request.TaskSize - toDo)) / (double)request.TaskSize) *100;
                 }
                 else
                 {
-                    progress.Progress_ = 0;
+                    progress.Progress_ = 100;
                 }
                 await responseStream.WriteAsync(progress);
-                Thread.Sleep(1000);
+                Thread.Sleep(200);
             }
-            while (context.CancellationToken.IsCancellationRequested && toDo > 0);
+            while (!context.CancellationToken.IsCancellationRequested && toDo > 0);
         }
     }
 }

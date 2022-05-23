@@ -10,9 +10,15 @@ import { ChartCardComponent } from './features/chat/chat-card/chat-card.componen
 import { FormsModule } from '@angular/forms';
 import { GrpcWebClientModule } from '@ngx-grpc/grpc-web-client';
 import { GrpcCoreModule } from '@ngx-grpc/core';
+import { CalculationCardComponent } from './features/calculation/calculation-card/calculation-card.component';
 
 @NgModule({
-  declarations: [AppComponent, ToolbarComponent, ChartCardComponent],
+  declarations: [
+    AppComponent,
+    ToolbarComponent,
+    ChartCardComponent,
+    CalculationCardComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

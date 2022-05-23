@@ -1,0 +1,33 @@
+:host {
+  display: flex;
+  width: 100%;
+}
+
+mat-card {
+  flex: 1;
+}
+
+.title {
+  margin-bottom: 8px;
+}
+
+.progress-bar {
+  display: flex;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.bar {
+  flex: 1;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.button {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.progress {
+  margin: -8px 8px 0px 8px;
+}
