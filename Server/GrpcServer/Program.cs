@@ -19,6 +19,9 @@ app.UseRouting();
 app.UseGrpcWeb();
 app.UseCors(); 
 app.UseEndpoints(endpoints =>
-    endpoints.MapGrpcService<MessagingService>().EnableGrpcWeb().RequireCors("AllowAll")
+    {
+        endpoints.MapGrpcService<MessagingService>().EnableGrpcWeb().RequireCors("AllowAll");
+        endpoints.MapGrpcService<CalculationService>().EnableGrpcWeb().RequireCors("AllowAll");
+    }
 );
 app.Run();

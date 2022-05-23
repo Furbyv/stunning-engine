@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServer";
+
+package calculate;
+
+// Calculation service definition
+service Calculating {
+  //Start a calculation, response stream the progress details
+  rpc Calculate (Calculation) returns (stream Progress);
+}
+
+// Inititial request message to start a task with a required defined taskSize
+message Calculation {
+  int32 taskSize = 1;
+}
+
+//Progress message object, indicating number of tasks to do, finished and the progress percentage
+message Progress{
+  int32 toDo = 1;
+  int32 finished =2;
+  double progress = 3;
+}
