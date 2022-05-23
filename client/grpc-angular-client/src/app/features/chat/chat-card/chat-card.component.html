@@ -2,26 +2,39 @@
   <div class="subscribe">
     <mat-form-field class="username-input" appearance="outline">
       <mat-label>Enter username</mat-label>
-      <input matInput placeholder="Ex. User1234" />
+      <input matInput [(ngModel)]="username" placeholder="Ex. User1234" />
     </mat-form-field>
     <button
       class="btn"
       mat-raised-button
       color="primary"
-      (click)="joinChat('abc')"
+      (click)="joinChat(username)"
+      [disabled]="(isConnected$ | async) !== null || username === ''"
     >
       Join chat
     </button>
   </div>
   <div class="chat-area">
     <p *ngIf="messages$ | async as message">
-      {{ message.message }}
+      {{ message.username }} ": " {{ message.message }}
     </p>
   </div>
   <div class="message">
     <mat-form-field class="message-input" appearance="outline">
-      <textarea matInput placeholder="Enter message..."></textarea>
+      <textarea
+        matInput
+        [(ngModel)]="message"
+        placeholder="Enter message..."
+      ></textarea>
     </mat-form-field>
-    <button class="btn" mat-raised-button color="secondary">Send</button>
+    <button
+      class="btn"
+      mat-raised-button
+      color="secondary"
+      (click)="sendMessage(message)"
+      [disabled]="(sending$ | async) || message === ''"
+    >
+      Send
+    </button>
   </div>
 </mat-card>
